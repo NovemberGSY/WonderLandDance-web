@@ -1,6 +1,7 @@
 /* pages/index/index.wxss */
 .container {
     padding-bottom: 120rpx; /* 增加底部间距 */
+    padding-top: 20rpx;
   }
   
   /* 新增横幅样式 */
@@ -19,20 +20,40 @@
     text-align: center;
     font-size: 36rpx;
     font-weight: bold;
-    padding: 30rpx 0;
+    padding: 6rpx 0 4rpx 0;
     background-color: #f8f8f8;
   }
   
   .course-list {
-    padding: 20rpx;
+    padding: 0 8rpx;
+  }
+  
+  .course-list-scroll {
+    max-height: 56vh;
+    min-height: 200rpx;
+    margin-bottom: 24rpx;
+    border-radius: 18rpx;
+    box-shadow: 0 2rpx 12rpx rgba(119,41,172,0.04);
+    background: #faf8fc;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
   }
   
   .course-item {
-    background: white;
-    border-radius: 12rpx;
-    padding: 24rpx;
-    margin-bottom: 24rpx;
-    box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+    width: 100%;
+    margin: 0 auto 24rpx auto;
+    border-radius: 18rpx;
+    box-shadow: 0 6rpx 18rpx rgba(119,41,172,0.08);
+    padding: 28rpx 20rpx;
+    background: #fff;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .course-item:last-child {
+    margin-bottom: 0;
+  }
+  .course-item:active {
+    box-shadow: 0 8rpx 24rpx rgba(119,41,172,0.12);
+    transform: scale(0.98);
   }
   
   .time-teacher {
@@ -63,7 +84,7 @@
   }
   
   .btn {
-    background: #07c160;
+    background: #7729ac;
     color: white;
     font-size: 28rpx;
     padding: 0 40rpx;
@@ -92,5 +113,73 @@
   }
   
   .tab-item.active {
-    color: #07c160;
+    color: #7729ac;
   }
+
+/* 轮播图样式 */
+.banner {
+  width: 92vw;
+  height: 240rpx;
+  margin: 8rpx auto 24rpx auto;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.08);
+}
+.banner-image {
+  width: 100%;
+  height: 240rpx;
+  object-fit: cover;
+  border-radius: 16rpx;
+}
+
+/* 一周课程表样式 */
+.week-schedule {
+  margin: 0 0 32rpx 0;
+  padding: 0 24rpx;
+}
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.week-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.week-date {
+  font-size: 24rpx;
+  color: #999;
+}
+.week-days {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 8rpx;
+}
+.day-item {
+  display: inline-block;
+  width: 90rpx;
+  margin-right: 16rpx;
+  padding: 16rpx 0;
+  text-align: center;
+  border-radius: 12rpx;
+  background: #f6f6f6;
+  color: #333;
+  transition: background 0.2s, color 0.2s;
+}
+.day-item.active {
+  background: #7729ac;
+  color: #fff;
+  font-weight: bold;
+}
+.day-name {
+  font-size: 26rpx;
+  display: block;
+}
+.day-date {
+  font-size: 22rpx;
+  color: #888;
+  display: block;
+}
