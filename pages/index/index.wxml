@@ -1,70 +1,48 @@
 <!-- pages/index/index.wxml -->
 <view class="container">
   <!-- 顶部标题 -->
-  <!-- pages/index/index.wxml -->
-<view class="container">
-  <!-- 顶部标题 -->
-  <view class="header">预约</view>
+  <view class="header">Echo Dance 课程预约</view>
 
-  <!-- 新增横幅 -->
-  <view class="banner-container">
-    <image 
-      src="images/wallhaven-136qp1_2560x1600.png" 
-      class="banner-img" 
-      mode="widthFix"
-    ></image>
+  <!-- 轮播图 -->
+  <swiper class="banner" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}">
+    <swiper-item wx:for="{{bannerList}}" wx:key="index">
+      <image src="{{item.imageUrl}}" mode="aspectFill" class="banner-image"></image>
+    </swiper-item>
+  </swiper>
+
+  <!-- 一周课程表 -->
+  <view class="week-schedule">
+    <view class="week-header">
+      <view class="week-title">本周课程</view>
+      <view class="week-date">{{currentWeek}}</view>
+    </view>
+    <scroll-view scroll-x="true" class="week-days">
+      <view class="day-item {{currentDay === index ? 'active' : ''}}" 
+            wx:for="{{weekDays}}" 
+            wx:key="index"
+            bindtap="selectDay"
+            data-index="{{index}}">
+        <text class="day-name">{{item.name}}</text>
+        <text class="day-date">{{item.date}}</text>
+      </view>
+    </scroll-view>
   </view>
 
   <!-- 课程列表 -->
-  <view class="course-list">
-    <!-- 原有课程项保持不变 -->
-    ...
-  </view>
-
-  <!-- 底部导航 -->
-  <view class="tab-bar">
-    ...
-  </view>
-</view>
-
-  <!-- 课程列表 -->
-  <view class="course-list">
-    <!-- 课程项1 -->
-    <view class="course-item">
-      <view class="time-teacher">
-        <text class="time">14:00–15:00 林林</text>
-        <text class="type">国风古典</text>
-      </view>
-      <view class="status">
-        <text class="reserved">已约3/25</text>
-        <button class="btn">预约</button>
+  <scroll-view scroll-y="true" class="course-list-scroll">
+    <view class="course-list">
+      <view class="course-item" wx:for="{{courseList}}" wx:key="index">
+        <view class="time-teacher">
+          <text class="time">{{item.time}} {{item.teacher}}</text>
+          <text class="type">{{item.type}}</text>
+        </view>
+        <view class="status">
+          <text class="reserved">已约{{item.reserved}}/{{item.total}}</text>
+          <button class="btn" bindtap="makeReservation" data-id="{{item.id}}">预约</button>
+        </view>
       </view>
     </view>
-
-    <!-- 课程项2 -->
-    <view class="course-item">
-      <view class="time-teacher">
-        <text class="time">16:00–17:20 33</text>
-        <text class="type">HIPHOP/编舞</text>
-      </view>
-      <view class="status">
-        <text class="reserved">已约13/25</text>
-        <button class="btn">预约</button>
-      </view>
-    </view>
-
-    <!-- 课程项3 -->
-    <view class="course-item">
-      <view class="time-teacher">
-        <text class="time">19:20–20:40 jenny</text>
-        <text class="type">JAZZ基础</text>
-      </view>
-      <view class="status">
-        <text class="reserved">已约11/25</text>
-        <button class="btn">预约</button>
-      </view>
-    </view>
-  </view>
+  </scroll-view>
 
   <!-- 底部导航 -->
   <view class="tab-bar">
