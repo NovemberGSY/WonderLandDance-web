@@ -21,14 +21,6 @@ Page({
     currentWeek: '',
     courseList: [],
     allCourses: [
-      // 周日
-      [
-        { id: 1, time: '09:00–10:00', teacher: '林林', type: '国风古典', reserved: 3, total: 25 },
-        { id: 2, time: '10:30–11:30', teacher: '33', type: 'HIPHOP/编舞', reserved: 13, total: 25 },
-        { id: 3, time: '14:00–15:00', teacher: 'jenny', type: 'JAZZ基础', reserved: 11, total: 25 },
-        { id: 4, time: '16:00–17:00', teacher: '小明', type: '拉丁舞', reserved: 8, total: 20 },
-        { id: 5, time: '18:00–19:00', teacher: '小红', type: '芭蕾', reserved: 5, total: 18 },
-      ],
       // 周一
       [
         { id: 6, time: '09:00–10:00', teacher: '林林', type: '国风古典', reserved: 6, total: 25 },
@@ -77,6 +69,27 @@ Page({
         { id: 34, time: '16:00–17:00', teacher: '小明', type: '拉丁舞', reserved: 15, total: 20 },
         { id: 35, time: '18:00–19:00', teacher: '小红', type: '芭蕾', reserved: 12, total: 18 },
       ],
+      // 周日
+      [
+        { id: 1, time: '09:00–10:00', teacher: '林林', type: '国风古典', reserved: 3, total: 25 },
+        { id: 2, time: '10:30–11:30', teacher: '33', type: 'HIPHOP/编舞', reserved: 13, total: 25 },
+        { id: 3, time: '14:00–15:00', teacher: 'jenny', type: 'JAZZ基础', reserved: 11, total: 25 },
+        { id: 4, time: '16:00–17:00', teacher: '小明', type: '拉丁舞', reserved: 8, total: 20 },
+        { id: 5, time: '18:00–19:00', teacher: '小红', type: '芭蕾', reserved: 5, total: 18 },
+      ],
+    ],
+    currentTab: 0, // 0=约课，1=我的
+    myInfo: {
+      name: '小喵',
+      phone: '138****8888',
+      cardType: '年卡', // 可选：次卡、年卡、季卡、月卡
+      remainTimes: 8, // 仅次卡有效
+      dateRange: '2024/06/01 - 2024/12/01',
+    },
+    myReservedCourses: [
+      { id: 1, date: '2024/06/10', time: '09:00–10:00', teacher: '林林', type: '国风古典' },
+      { id: 2, date: '2024/06/12', time: '14:00–15:00', teacher: 'jenny', type: 'JAZZ基础' },
+      { id: 3, date: '2024/06/15', time: '16:00–17:00', teacher: '小明', type: '拉丁舞' },
     ],
   },
   bindViewTap() {
@@ -116,9 +129,11 @@ Page({
   onLoad() {
     const weekDays = [];
     const today = new Date();
-    const dayNames = ['日', '一', '二', '三', '四', '五', '六'];
+    const dayNames = ['一', '二', '三', '四', '五', '六', '日'];
     let firstDay = new Date(today);
-    firstDay.setDate(today.getDate() - today.getDay());
+    let day = today.getDay();
+    let offset = day === 0 ? -6 : 1 - day;
+    firstDay.setDate(today.getDate() + offset);
     for (let i = 0; i < 7; i++) {
       const d = new Date(firstDay);
       d.setDate(firstDay.getDate() + i);
@@ -129,11 +144,12 @@ Page({
     }
     const weekStart = weekDays[0].date;
     const weekEnd = weekDays[6].date;
+    let currentDay = day === 0 ? 6 : day - 1;
     this.setData({
       weekDays,
       currentWeek: weekStart + ' - ' + weekEnd,
-      currentDay: today.getDay(),
-      courseList: this.data.allCourses[today.getDay()] || [],
+      currentDay: currentDay,
+      courseList: this.data.allCourses[currentDay] || [],
     });
   },
   selectDay(e) {
@@ -148,6 +164,17 @@ Page({
     wx.showToast({
       title: '预约功能待实现',
       icon: 'none',
+    });
+  },
+  goToMyPage() {
+    wx.navigateTo({
+      url: '/pages/my/my',
+    });
+  },
+  switchTab(e) {
+    const tab = e.currentTarget.dataset.tab;
+    this.setData({
+      currentTab: tab
     });
   },
 })

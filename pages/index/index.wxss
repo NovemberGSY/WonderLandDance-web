@@ -183,3 +183,129 @@
   color: #888;
   display: block;
 }
+
+.my-container {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40rpx;
+}
+.my-header {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #7729ac;
+  margin-bottom: 32rpx;
+  margin-top: 0;
+  text-align: center;
+}
+.profile-card {
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(119,41,172,0.10);
+  padding: 48rpx 36rpx 36rpx 36rpx;
+  width: 90vw;
+  max-width: 600rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  box-shadow: 0 4rpx 16rpx rgba(119,41,172,0.10);
+  margin-bottom: 16rpx;
+}
+.user-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #7729ac;
+}
+.info-section {
+  width: 100%;
+}
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #f0e6fa;
+}
+.info-item:last-child {
+  border-bottom: none;
+}
+.label {
+  font-size: 28rpx;
+  color: #888;
+}
+.value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.my-reserved-list {
+  width: 90vw;
+  max-width: 600rpx;
+  margin: 32rpx auto 0 auto;
+  max-height: 400rpx;
+  background: #fff;
+  border-radius: 18rpx;
+  box-shadow: 0 4rpx 18rpx rgba(119,41,172,0.06);
+  padding: 24rpx 24rpx 8rpx 24rpx;
+  overflow-y: auto;
+}
+.reserved-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #7729ac;
+  margin-bottom: 18rpx;
+}
+.reserved-course {
+  border-bottom: 1rpx solid #f0e6fa;
+  padding: 16rpx 0 12rpx 0;
+}
+.reserved-course:last-child {
+  border-bottom: none;
+}
+.reserved-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+.reserved-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #333;
+}
+.reserved-type {
+  font-weight: 500;
+}
+.reserved-teacher {
+  margin-left: 32rpx;
+}
+
+.my-reserved-list-scroll {
+  width: 100vw;
+  flex: 1;
+  height: 0;
+  min-height: 200rpx;
+  max-height: calc(100vh - 100rpx - 40rpx - 32rpx - 340rpx); /* tab栏+顶部间距+标题+卡片 */
+  box-sizing: border-box;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

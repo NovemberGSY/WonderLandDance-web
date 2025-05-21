@@ -1,0 +1,28 @@
+<view class="my-container">
+  <view class="profile-card">
+    <view class="avatar-section">
+      <image class="avatar" src="https://img1.imgtp.com/2023/07/01/abcd1.jpg" mode="aspectFill" />
+      <view class="user-name">{{userInfo.name}}</view>
+    </view>
+    <view class="info-section">
+      <view class="info-item">
+        <text class="label">手机号：</text>
+        <text class="value">{{userInfo.phone}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">卡类型：</text>
+        <text class="value">{{userInfo.cardType}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">剩余次数：</text>
+        <text class="value">
+          {{userInfo.cardType === '次卡' ? userInfo.remainTimes : '♾️'}}
+        </text>
+      </view>
+      <view class="info-item">
+        <text class="label">使用时间：</text>
+        <text class="value">{{userInfo.dateRange}}</text>
+      </view>
+    </view>
+  </view>
+</view> 

@@ -1,53 +1,104 @@
 <!-- pages/index/index.wxml -->
 <view class="container">
   <!-- 顶部标题 -->
-  <view class="header">Echo Dance 课程预约</view>
+  <block wx:if="{{currentTab == 0}}">
+    <view class="header">Wonder Land Dance 课程预约</view>
+  </block>
 
-  <!-- 轮播图 -->
-  <swiper class="banner" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}">
-    <swiper-item wx:for="{{bannerList}}" wx:key="index">
-      <image src="{{item.imageUrl}}" mode="aspectFill" class="banner-image"></image>
-    </swiper-item>
-  </swiper>
-
-  <!-- 一周课程表 -->
-  <view class="week-schedule">
-    <view class="week-header">
-      <view class="week-title">本周课程</view>
-      <view class="week-date">{{currentWeek}}</view>
+  <!-- 约课内容 -->
+  <block wx:if="{{currentTab == 0}}">
+    <!-- 轮播图 -->
+    <swiper class="banner" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}">
+      <swiper-item wx:for="{{bannerList}}" wx:key="index">
+        <image src="{{item.imageUrl}}" mode="aspectFill" class="banner-image"></image>
+      </swiper-item>
+    </swiper>
+    <!-- 一周课程表 -->
+    <view class="week-schedule">
+      <view class="week-header">
+        <view class="week-title">本周课程</view>
+        <view class="week-date">{{currentWeek}}</view>
+      </view>
+      <scroll-view scroll-x="true" class="week-days">
+        <view class="day-item {{currentDay === index ? 'active' : ''}}" 
+              wx:for="{{weekDays}}" 
+              wx:key="index"
+              bindtap="selectDay"
+              data-index="{{index}}">
+          <text class="day-name">{{item.name}}</text>
+          <text class="day-date">{{item.date}}</text>
+        </view>
+      </scroll-view>
     </view>
-    <scroll-view scroll-x="true" class="week-days">
-      <view class="day-item {{currentDay === index ? 'active' : ''}}" 
-            wx:for="{{weekDays}}" 
-            wx:key="index"
-            bindtap="selectDay"
-            data-index="{{index}}">
-        <text class="day-name">{{item.name}}</text>
-        <text class="day-date">{{item.date}}</text>
+    <!-- 课程列表 -->
+    <scroll-view scroll-y="true" class="course-list-scroll">
+      <view class="course-list">
+        <view class="course-item" wx:for="{{courseList}}" wx:key="index">
+          <view class="time-teacher">
+            <text class="time">{{item.time}} {{item.teacher}}</text>
+            <text class="type">{{item.type}}</text>
+          </view>
+          <view class="status">
+            <text class="reserved">已约{{item.reserved}}/{{item.total}}</text>
+            <button class="btn" bindtap="makeReservation" data-id="{{item.id}}">预约</button>
+          </view>
+        </view>
       </view>
     </scroll-view>
-  </view>
+  </block>
 
-  <!-- 课程列表 -->
-  <scroll-view scroll-y="true" class="course-list-scroll">
-    <view class="course-list">
-      <view class="course-item" wx:for="{{courseList}}" wx:key="index">
-        <view class="time-teacher">
-          <text class="time">{{item.time}} {{item.teacher}}</text>
-          <text class="type">{{item.type}}</text>
+  <!-- 我的内容 -->
+  <block wx:if="{{currentTab == 1}}">
+    <view class="my-container">
+      <view class="my-header">我的信息和预约详情</view>
+      <view class="profile-card">
+        <view class="avatar-section">
+          <image class="avatar" src="https://img1.imgtp.com/2023/07/01/abcd1.jpg" mode="aspectFill" />
+          <view class="user-name">{{myInfo.name}}</view>
         </view>
-        <view class="status">
-          <text class="reserved">已约{{item.reserved}}/{{item.total}}</text>
-          <button class="btn" bindtap="makeReservation" data-id="{{item.id}}">预约</button>
+        <view class="info-section">
+          <view class="info-item">
+            <text class="label">手机号：</text>
+            <text class="value">{{myInfo.phone}}</text>
+          </view>
+          <view class="info-item">
+            <text class="label">卡类型：</text>
+            <text class="value">{{myInfo.cardType}}</text>
+          </view>
+          <view class="info-item">
+            <text class="label">剩余次数：</text>
+            <text class="value">
+              {{myInfo.cardType === '次卡' ? myInfo.remainTimes : '♾️'}}
+            </text>
+          </view>
+          <view class="info-item">
+            <text class="label">使用时间：</text>
+            <text class="value">{{myInfo.dateRange}}</text>
+          </view>
         </view>
       </view>
+      <scroll-view scroll-y="true" class="my-reserved-list-scroll">
+        <view class="my-reserved-list">
+          <view class="reserved-title">已预约课程</view>
+          <view class="reserved-course" wx:for="{{myReservedCourses}}" wx:key="id">
+            <view class="reserved-info">
+              <text class="reserved-date">{{item.date}}</text>
+              <text class="reserved-time">{{item.time}}</text>
+            </view>
+            <view class="reserved-detail">
+              <text class="reserved-type">{{item.type}}</text>
+              <text class="reserved-teacher">{{item.teacher}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
     </view>
-  </scroll-view>
+  </block>
 
   <!-- 底部导航 -->
   <view class="tab-bar">
-    <view class="tab-item active">约课</view>
-    <view class="tab-item">我的</view>
+    <view class="tab-item {{currentTab == 0 ? 'active' : ''}}" data-tab="0" bindtap="switchTab">约课</view>
+    <view class="tab-item {{currentTab == 1 ? 'active' : ''}}" data-tab="1" bindtap="switchTab">我的</view>
     <view class="tab-item">首页</view>
   </view>
 </view>
