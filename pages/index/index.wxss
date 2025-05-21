@@ -96,13 +96,14 @@
   
   .tab-bar {
     position: fixed;
-    bottom: 0;
+    bottom: 40rpx; /* 原0，向上移动40rpx */
     left: 0;
     right: 0;
     height: 100rpx;
     display: flex;
     background: white;
     border-top: 1rpx solid #eee;
+    z-index: 99;
   }
   
   .tab-item {
@@ -204,13 +205,13 @@
   background: #fff;
   border-radius: 24rpx;
   box-shadow: 0 8rpx 32rpx rgba(119,41,172,0.10);
-  padding: 48rpx 36rpx 36rpx 36rpx;
+  padding: 28rpx 20rpx 20rpx 20rpx;
   width: 90vw;
   max-width: 600rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 32rpx;
+  margin-bottom: 24rpx;
 }
 .avatar-section {
   display: flex;
@@ -219,14 +220,14 @@
   margin-bottom: 32rpx;
 }
 .avatar {
-  width: 120rpx;
-  height: 120rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
   box-shadow: 0 4rpx 16rpx rgba(119,41,172,0.10);
-  margin-bottom: 16rpx;
+  margin-bottom: 12rpx;
 }
 .user-name {
-  font-size: 36rpx;
+  font-size: 30rpx;
   font-weight: bold;
   color: #7729ac;
 }
@@ -253,59 +254,108 @@
   font-weight: 500;
 }
 
-.my-reserved-list {
-  width: 90vw;
-  max-width: 600rpx;
-  margin: 32rpx auto 0 auto;
-  max-height: 400rpx;
+.my-courses-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24rpx;
+}
+.my-reserved-list, .my-history-list {
+  width: 320rpx;
   background: #fff;
   border-radius: 18rpx;
   box-shadow: 0 4rpx 18rpx rgba(119,41,172,0.06);
   padding: 24rpx 24rpx 8rpx 24rpx;
-  overflow-y: auto;
+  margin-bottom: 0;
 }
-.reserved-title {
-  font-size: 30rpx;
-  font-weight: 500;
-  color: #7729ac;
-  margin-bottom: 18rpx;
-}
-.reserved-course {
-  border-bottom: 1rpx solid #f0e6fa;
-  padding: 16rpx 0 12rpx 0;
-}
-.reserved-course:last-child {
-  border-bottom: none;
-}
-.reserved-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 26rpx;
-  color: #666;
-  margin-bottom: 4rpx;
-}
-.reserved-detail {
-  display: flex;
-  justify-content: space-between;
-  font-size: 26rpx;
-  color: #333;
-}
-.reserved-type {
-  font-weight: 500;
-}
-.reserved-teacher {
-  margin-left: 32rpx;
-}
-
 .my-reserved-list-scroll {
   width: 100vw;
-  flex: 1;
-  height: 0;
+  flex: none;
+  height: 420rpx;
   min-height: 200rpx;
-  max-height: calc(100vh - 100rpx - 40rpx - 32rpx - 340rpx); /* tab栏+顶部间距+标题+卡片 */
+  max-height: 420rpx;
   box-sizing: border-box;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.my-courses-tab-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #f6f6f6;
+  border-radius: 18rpx;
+  margin: 0 24rpx 24rpx 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(119,41,172,0.04);
+  overflow: hidden;
+}
+.my-courses-tab {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  padding: 18rpx 0;
+  color: #7729ac;
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.my-courses-tab.active {
+  background: #fff;
+  color: #7729ac;
+  font-weight: bold;
+  box-shadow: 0 2rpx 8rpx rgba(119,41,172,0.08);
+}
+
+.my-courses-list {
+  width: 90vw;
+  max-width: 600rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  margin: 0 auto;
+}
+.my-course-card {
+  background: #fff;
+  border-radius: 18rpx;
+  box-shadow: 0 4rpx 18rpx rgba(119,41,172,0.08);
+  padding: 28rpx 24rpx;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+}
+.my-course-card:active {
+  box-shadow: 0 8rpx 24rpx rgba(119,41,172,0.12);
+}
+.my-course-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+}
+.my-course-date {
+  font-weight: bold;
+}
+.my-course-time {
+  color: #7729ac;
+  margin-left: 24rpx;
+}
+.my-course-detail {
+  margin-top: 18rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #f0e6fa;
+  font-size: 26rpx;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+.my-course-type {
+  font-weight: 500;
+}
+.my-course-teacher {
+  margin-left: 0;
 }

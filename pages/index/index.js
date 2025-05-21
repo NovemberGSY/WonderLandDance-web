@@ -91,6 +91,13 @@ Page({
       { id: 2, date: '2024/06/12', time: '14:00–15:00', teacher: 'jenny', type: 'JAZZ基础' },
       { id: 3, date: '2024/06/15', time: '16:00–17:00', teacher: '小明', type: '拉丁舞' },
     ],
+    myHistoryCourses: [
+      { id: 101, date: '2024/05/10', time: '09:00–10:00', teacher: '林林', type: '国风古典' },
+      { id: 102, date: '2024/05/12', time: '14:00–15:00', teacher: 'jenny', type: 'JAZZ基础' },
+      { id: 103, date: '2024/05/15', time: '16:00–17:00', teacher: '小明', type: '拉丁舞' },
+    ],
+    myCourseTab: 0, // 0=已预约，1=历史预约
+    openedCourseId: null,
   },
   bindViewTap() {
     wx.navigateTo({
@@ -175,6 +182,19 @@ Page({
     const tab = e.currentTarget.dataset.tab;
     this.setData({
       currentTab: tab
+    });
+  },
+  switchMyCourseTab(e) {
+    const tab = e.currentTarget.dataset.tab;
+    this.setData({
+      myCourseTab: tab,
+      openedCourseId: null // 切换tab时收起详情
+    });
+  },
+  toggleCourseDetail(e) {
+    const id = e.currentTarget.dataset.id;
+    this.setData({
+      openedCourseId: this.data.openedCourseId === id ? null : id
     });
   },
 })
